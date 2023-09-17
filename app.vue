@@ -96,8 +96,6 @@ function generate() {
     randomSquare()
   );
 
-  console.log(grid);
-
   for (let i = 0; i < grid.length; i++) {
     const gridX = i % width.value;
     const gridY = (i - gridX) / width.value;
@@ -111,8 +109,10 @@ function generate() {
       (item): item is number => item !== null
     );
 
-    while (filled.includes(grid[i])) {
+    let attempts = 0;
+    while (filled.includes(grid[i]) && attempts < 100) {
       grid[i] = randomSquare();
+      attempts++;
     }
   }
 
